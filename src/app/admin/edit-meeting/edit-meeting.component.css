@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 56px);
+}
+.notifyError {
+  color: #a94442;
+}
+
+.loading {
+  color: white;
+  padding-top: 50px;
+}
+.icon-background {
+  color: #002651;
+}
+
+.icon-background:hover {
+  color: #28c7fa;
+}
+
+.btn-outline-success {
+  color: #002651;
+  background-color: transparent;
+  background-image: none;
+  border-color: #002651;
+}
+.btn-outline-success:hover {
+  color: #28c7fa;
+  font-weight: 600;
+  background-color: #002651;
+  border-color: #002651;
+}
+.btn-outline-success:focus,
+.btn-outline-success.focus {
+  box-shadow: 0 0 0 0.1rem #002651;
+}
+.btn-outline-success.disabled,
+.btn-outline-success:disabled {
+  color: #073263;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.btn-outline-success:not(:disabled):not(.disabled):active,
+.btn-outline-success:not(:disabled):not(.disabled).active,
+.show > .btn-outline-success.dropdown-toggle {
+  background-color: transparent;
+  border-color: #002651;
+}
+.btn-outline-success:not(:disabled):not(.disabled):active:focus,
+.btn-outline-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.1rem #002651;
+}
+
+.card {
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1), 0 -15px 35px rgba(0, 0, 0, 0.1),
+    0 15px 35px rgba(0, 0, 0, 0.1);
+}

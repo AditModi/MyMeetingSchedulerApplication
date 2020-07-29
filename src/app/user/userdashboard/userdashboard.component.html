@@ -1,0 +1,163 @@
+<app-topnav [dashboardName]="name" (notify)="logout($event)"></app-topnav>
+<div class="wrapper">
+  <app-sidenav
+    [normalUserId]="localStorage.userId"
+    [avatar]="localStorage.avatar"
+    [username]="localStorage.userName"
+  ></app-sidenav>
+  <div
+    class="px-4 py-4"
+    style="flex: 1 1 auto;
+    overflow-y: auto;"
+  >
+    <div class="row text-center">
+      <h4>{{ localStorage.firstName }}'s planner</h4>
+    </div>
+    <div class="row py-4 text-center">
+      <div class="col-sm-12 col-md-5">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Previous
+          </div>
+          <div
+            class="btn btn-outline-primary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+            [class.active]="viewDate"
+          >
+            Today
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
+      </div>
+      <div class="col-sm-12 col-md-5">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+          >
+            Month
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Week)"
+            [class.active]="view === CalendarView.Week"
+          >
+            Week
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Day)"
+            [class.active]="view === CalendarView.Day"
+          >
+            Day
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row calendar mb-3">
+      <div class="col">
+        <div [ngSwitch]="view" class="pb-3">
+          <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-day-view>
+        </div>
+
+        <ng-template #modalContent let-close="close">
+          <div class="modal-header">
+            <h4 class="modal-title">{{ modalData1.title | titlecase }}</h4>
+          </div>
+          <div class="modal-body">
+            <p>Location: {{ modalData1.location }}</p>
+            <p>Meeting starts at: {{ modalData1.start | date: "medium" }}</p>
+            <p>Meeting starts at: {{ modalData1.end | date: "medium" }}</p>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="close()"
+            >
+              OK
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template #reminderModal let-close="close">
+          <div class="modal-header"><span class="bell fa fa-bell"></span></div>
+          <div class="modal-body">
+            <p>
+              <strong>{{ modalData2 }}</strong>
+            </p>
+            <p>
+              You can snooze this reminder if desired.
+            </p>
+            <div class="text-center">
+              <button
+                type="button"
+                ngbAutofocus
+                class="btn btn-danger mx-2"
+                (click)="callTheReminderAgain()"
+              >
+                Snooze
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary mx-2"
+                (click)="close()"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

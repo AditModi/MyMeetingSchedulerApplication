@@ -1,0 +1,9 @@
+version: "3"
+services:
+    myapp:
+        build: .
+        ports:
+            -"8080:4200"
+        volumes: 
+            -"/app/node_modules"
+            -".:/app"    

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+  </head>
+  <body>
+    <div
+      class="header"
+      style="position: absolute;top: 0;left: 0;width: 100%;z-index: 5;"
+    >
+      <app-navbar></app-navbar>
+    </div>
+    <div class="section">
+      <div class="container loginForm">
+        <div class="card">
+          <div class="card-header">
+            <p style="font-size: 1.5em;font-weight: 700;text-align: center;">
+              Login
+            </p>
+          </div>
+          <div class="card-body">
+            <form name="form" #loginForm="ngForm" (ngSubmit)="loginFunction()">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"
+                      ><img src="./../../../assets/img/user.svg" alt=""
+                    /></span>
+                  </div>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    [(ngModel)]="email"
+                    [ngModelOptions]="{ standalone: true }"
+                    #inputEmail="ngModel"
+                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    required
+                    autofocus
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    inputEmail.invalid &&
+                    (inputEmail.dirty || inputEmail.touched)
+                  "
+                  class="notifyError"
+                >
+                  <div *ngIf="inputEmail.errors.required">
+                    Please enter the email
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"
+                      ><img src="./../../../assets/img/lock.svg" alt=""
+                    /></span>
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="password"
+                    [(ngModel)]="password"
+                    [ngModelOptions]="{ standalone: true }"
+                    #inputPassword="ngModel"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+
+                <div
+                  *ngIf="
+                    inputPassword.invalid &&
+                    (inputPassword.dirty || inputPassword.touched)
+                  "
+                  class="notifyError"
+                >
+                  Please enter the password
+                  <div *ngIf="loginForm.controls['password']?.errors?.required">
+                    Please enter the password
+                  </div>
+                </div>
+              </div>
+
+              <div class="forgotPassword">
+                <a [routerLink]="['/forgotPassword']">Forgot Password?</a>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-outline-success btn-block loginBtn"
+              >
+                Login
+              </button>
+              <div class="signUpBtn">
+                <a [routerLink]="['/signup']">Not a member? Signup</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

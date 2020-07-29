@@ -1,0 +1,171 @@
+<app-topnav [dashboardName]="name"></app-topnav>
+<div class="wrapper">
+  <app-sidenav
+    [adminUserId]="localStorage.userId"
+    [avatar]="localStorage.avatar"
+    [username]="localStorage.userName"
+  ></app-sidenav>
+
+  <div
+    class="container py-3"
+    style="width: 900px;"
+    *ngIf="(editForm | keyvalue)?.length"
+  >
+   
+    <div class="row align-items-center">
+      <div class="col">
+        <ngx-spinner
+          style="height: 50px; width: 500px;"
+          bdColor="rgba(0, 0, 0, 0.8)"
+          size="medium"
+          color="#fff"
+          type="ball-atom"
+          [fullScreen]="false"
+          ><p style="color: white">...</p></ngx-spinner
+        >
+        <div class="card">
+          <div class="card-body">
+            <div
+              style="display: flex;justify-content: space-between;cursor: pointer;"
+            >
+              <span class="fa-stack fa-lg icon-background" (click)="goBack()">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-angle-left fa-stack-1x"></i>
+              </span>
+              <span
+                class="fa-stack fa-lg icon-background"
+                (click)="openConfirmModal()"
+              >
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-trash fa-stack-1x"></i>
+              </span>
+            </div>
+          
+            <form name="form" #meetingForm="ngForm" (ngSubmit)="editMeeting()">
+              <div class="form-group mt-2">
+                <label for="purpose">Purpose</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="purpose"
+                  [(ngModel)]="editForm.purpose"
+                  #inputPurpose="ngModel"
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                    inputPurpose.invalid &&
+                    (inputPurpose.dirty || inputPurpose.touched)
+                  "
+                  class="notifyError"
+                >
+                  <div *ngIf="inputPurpose.errors.required">
+                    Please enter the purpose
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  name="location"
+                  [(ngModel)]="editForm.location"
+                  #inputLocation="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    inputLocation.invalid &&
+                    (inputLocation.dirty || inputLocation.touched)
+                  "
+                  class="notifyError"
+                >
+                  <div *ngIf="inputLocation.errors.required">
+                    Please enter the location
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="purpose">Start Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="startdate"
+                  mwlFlatpickr
+                  [(ngModel)]="editForm.startDate"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  [disable]="[disabledDay]"
+                />
+              </div>
+              <div class="form-group">
+                <label for="purpose">End Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="enddate"
+                  mwlFlatpickr
+                  [(ngModel)]="editForm.endDate"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  [disable]="[disabledDay]"
+                />
+              </div>
+              <div class="form-group">
+                <label for="admin_name">Created By</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="adminname"
+                  [(ngModel)]="editForm.admin_name"
+                  readonly
+                />
+              </div>
+
+              <button
+                type="submit"
+                [disabled]="!meetingForm.dirty"
+                class="btn btn-outline-success btn-block loginBtn"
+              >
+                Edit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-body">
+    <p>
+      <strong>Are you sure you want to delete the meeting? </strong>
+    </p>
+    <p>
+      All information associated to this meeting will be permanently deleted.
+      <span class="text-danger">This operation can not be undone.</span>
+    </p>
+    <div class="text-center">
+      <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-danger mx-2"
+        (click)="deleteMeeting()"
+      >
+        Yes
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary mx-2"
+        (click)="close()"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</ng-template>

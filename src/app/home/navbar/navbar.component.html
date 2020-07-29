@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-color">
+  <a class="navbar-brand" href="#" style="font-weight: 700;color: #fff"
+    >Meet Up</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/signup']" routerLinkActive="active"
+          >Signup</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active"
+          >Login</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

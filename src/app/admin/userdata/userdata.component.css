@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 56px);
+}
+
+/*custom color for bootstrap button*/
+.btn-primary {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: teal; */
+  /* border-color: #005a5a; */
+  background-color: #28c7fa;
+  border-color: #28c7fa;
+}
+
+.btn-primary:hover {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: #004d4d;
+  border-color: #009a9a; */
+  background-color: #03a7dd;
+  border-color: #03a7dd;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  /* box-shadow: 0 0 0 0.2rem rgba(0, 90, 90, 0.5); */
+  box-shadow: 0 0 0 0.2rem #03a7dd;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: teal;
+  border-color: #005a5a; */
+  background-color: #28c7fa;
+  border-color: #28c7fa;
+}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  /* color: #fff; */
+  color: #fff;
+  /* background-color: #00b3b3; */
+  background-color: #024e68;
+  border-color: #024e68;
+  /* border-color: #000; */
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 90, 90, 0.5);
+}
+
+.btn-outline-primary {
+  color: #000;
+  background-color: transparent;
+  background-image: none;
+  border-color: #28c7fa;
+}
+.btn-outline-primary:hover {
+  color: #000;
+  background-color: #03a7dd;
+  border-color: #03a7dd;
+}
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+  box-shadow: 0 0 0 0.2rem #024e68;
+  border-color: #024e68;
+}
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+  color: #000;
+  background-color: transparent;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+  color: #000;
+  background-color: transparent;
+  border-color: #024e68;
+}
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #024e68;
+}
+
+.calendar {
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1), 0 -15px 35px rgba(0, 0, 0, 0.1),
+    0 15px 35px rgba(0, 0, 0, 0.1);
+}

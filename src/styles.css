@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
+@import "~font-awesome/css/font-awesome.css";
+@import "flatpickr/dist/flatpickr.css";
+* {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+h3 {
+  margin: 0 0 10px;
+}
+/* 
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+} */

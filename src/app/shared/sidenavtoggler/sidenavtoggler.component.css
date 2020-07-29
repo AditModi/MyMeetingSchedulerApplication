@@ -1,0 +1,9 @@
+.navbar-toggler {
+  color: #fff;
+  border: none !important;
+  outline: none !important;
+}
+.navbar-toggler .fa {
+  color: #fff;
+  font-size: 1.4rem;
+}

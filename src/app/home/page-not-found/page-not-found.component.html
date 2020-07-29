@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+  </head>
+  <body>
+    <div
+      class="header"
+      style="position: absolute;top: 0;left: 0;width: 100%;z-index: 5;"
+    >
+      <app-navbar></app-navbar>
+    </div>
+
+    <div class="section">
+      <div class="container forgotPasswordForm">
+        <div class="card">
+          <div class="card-body">
+            <p style="font-weight: 400;font-size:2em;text-align: center">
+              Oops!
+            </p>
+            <p style="font-weight: 400;font-size:2em;text-align: center">
+              404 Not Found
+            </p>
+            <p style="font-weight: 300;font-size:1em;">
+              Sorry, an error has occured, Requested page not found!
+            </p>
+            <button class="btn btn-success btn-block" [routerLink]="['/login']">
+              Take me to Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

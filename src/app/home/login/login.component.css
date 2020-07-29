@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  background-color: rgb(221, 221, 221);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #002651;
+}
+
+/*custom color for bootstrap buttons*/
+.btn-outline-success {
+  color: #002651;
+  background-color: transparent;
+  background-image: none;
+  border-color: #002651;
+}
+.btn-outline-success:hover {
+  color: #fff;
+  font-weight: 500;
+  background-color: #002651;
+  border-color: #002651;
+}
+.btn-outline-success:focus,
+.btn-outline-success.focus {
+  box-shadow: 0 0 0 0.1rem #002651;
+}
+.btn-outline-success.disabled,
+.btn-outline-success:disabled {
+  color: #073263;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.btn-outline-success:not(:disabled):not(.disabled):active,
+.btn-outline-success:not(:disabled):not(.disabled).active,
+.show > .btn-outline-success.dropdown-toggle {
+  background-color: transparent;
+  border-color: #002651;
+}
+.btn-outline-success:not(:disabled):not(.disabled):active:focus,
+.btn-outline-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.1rem #002651;
+}
+
+.card {
+  /* box-shadow: 0px 3px 20px 2px #35baee; */
+  box-shadow: -15px 0 35px rgba(0, 0, 0, 0.1), 0 -15px 35px rgba(0, 0, 0, 0.1),
+    0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.forgotPassword {
+  display: block;
+}
+
+.loginBtn {
+  margin-top: 2vh;
+  border-radius: 20px;
+}
+.signUpBtn {
+  margin-top: 2vh;
+}
+
+body {
+  overflow-y: hidden;
+}
+@media screen and (min-width: 768px) {
+  .loginForm {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .loginForm {
+    width: 300px;
+    padding-top: 20%;
+    padding-bottom: 10%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .loginForm {
+    padding-top: 20%;
+    padding-bottom: 10%;
+  }
+}
+
+
+input.ng-dirty.ng-valid {
+  border-color: #42a948;
+}
+
+input.ng-dirty.ng-invalid {
+  border-color: #a94442;
+}
+.notifyError {
+  color: #a94442;
+}

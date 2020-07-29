@@ -1,0 +1,199 @@
+<app-topnav [dashboardName]="name"></app-topnav>
+<div class="wrapper" *ngIf="showTemplate">
+  <app-sidenav
+    [adminUserId]="localStorage.userId"
+    [normalUserId]="userId"
+    [avatar]="localStorage.avatar"
+    [username]="localStorage.userName"
+    (notify)="logout($event)"
+  ></app-sidenav>
+  <div
+    class="py-4 px-4"
+    style="flex: 1 1 auto;
+          overflow: auto;"
+  >
+    <div class="row text-center" *ngIf="currentUser != ''">
+      <h4 class="ml-2">{{ currentUser }}'s planner</h4>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <button
+          type="button"
+          class="btn btn-primary btn-block mb-3"
+          (click)="createMeeting()"
+        >
+          <span class="fa-stack">
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-plus fa-stack-1x"></i>
+          </span>
+          Create a new meeting
+        </button>
+      </div>
+    </div>
+    <div class="row py-4 text-center">
+      <div class="col-sm-12 col-md-5">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Previous
+          </div>
+          <div
+            class="btn btn-outline-primary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+          >
+            Today
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
+      </div>
+      <div class="col-sm-12 col-md-5">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+          >
+            Month
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Week)"
+            [class.active]="view === CalendarView.Week"
+          >
+            Week
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Day)"
+            [class.active]="view === CalendarView.Day"
+          >
+            Day
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row calendar mb-3">
+      <div class="col">
+        <ngx-spinner
+          style="height: 50px; width: 500px;"
+          bdColor="rgba(0, 0, 0, 0.8)"
+          size="medium"
+          color="#fff"
+          type="ball-atom"
+          [fullScreen]="false"
+          ><p style="color: white">Getting meeting info...</p></ngx-spinner
+        >
+        <div [ngSwitch]="view" class="pb-3">
+          <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-month-view>
+          <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-week-view>
+          <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+          >
+          </mwl-calendar-day-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ modalData.title | titlecase }}</h4>
+  </div>
+
+  <div class="modal-body">
+    <p>Location: {{ modalData.location }}</p>
+    <p>Meeting starts at: {{ modalData.start | date: "medium" }}</p>
+    <p>Meeting starts at: {{ modalData.end | date: "medium" }}</p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="editMeet(modalData?.meetingId)"
+    >
+      <i class="fa fa-fw fa-pencil"></i>Edit
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="deleteMeet(modalData?.meetingId)"
+    >
+      <i class="fa fa-fw fa-trash"></i>Delete
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #confirmForDelete let-close="close">
+  <div class="modal-body">
+    <p>
+      <strong>Are you sure you want to delete the meeting? </strong>
+    </p>
+    <p>
+      All information associated to this meeting will be permanently deleted.
+      <span class="text-danger">This operation can not be undone.</span>
+    </p>
+    <div class="text-center">
+      <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-danger mx-2"
+        (click)="deleteEvent($event)"
+      >
+        Yes
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary mx-2"
+        (click)="close()"
+      >
+        No
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+  </head>
+  <body>
+    <div
+      class="header"
+      style="position: absolute;top: 0;left: 0;width: 100%;z-index: 5;"
+    >
+      <app-navbar></app-navbar>
+    </div>
+   
+    <div class="section">
+      <div class="container signUpForm">
+        <div class="card">
+          <div class="card-header">
+            <p style="font-size: 1.5em;font-weight: 700;text-align: center;">
+              Sign Up
+            </p>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="signUpFunction()">
+              <div class="form-row">
+                <div class="form-group col-md-6 col-sm-12">
+                  <label for="firstName">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    [(ngModel)]="firstName"
+                    [ngModelOptions]="{ standalone: true }"
+                    #inputFirstName="ngModel"
+                    required
+                    autofocus
+                  />
+                  <div
+                    *ngIf="
+                      inputFirstName.invalid &&
+                      (inputFirstName.dirty || inputFirstName.touched)
+                    "
+                    class="notifyError"
+                  >
+                    First Name is empty
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-12">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    [(ngModel)]="lastName"
+                    [ngModelOptions]="{ standalone: true }"
+                    #inputLastName="ngModel"
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      inputLastName.invalid &&
+                      (inputLastName.dirty || inputLastName.touched)
+                    "
+                    class="notifyError"
+                  >
+                    Last Name is empty
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter email"
+                  [(ngModel)]="email"
+                  [ngModelOptions]="{ standalone: true }"
+                  #inputEmail="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    inputEmail.invalid &&
+                    (inputEmail.dirty || inputEmail.touched)
+                  "
+                  class="notifyError"
+                >
+                  Email is empty
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password1"
+                  placeholder="Enter password"
+                  [(ngModel)]="password"
+                  [ngModelOptions]="{ standalone: true }"
+                  #inputPassword="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    inputPassword.invalid &&
+                    (inputPassword.dirty || inputPassword.touched)
+                  "
+                  class="notifyError"
+                >
+                  Please enter password
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Confirm password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password2"
+                  placeholder="Enter password"
+                  [(ngModel)]="confirmPassword"
+                  [ngModelOptions]="{ standalone: true }"
+                  #inputConfirmPassword="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    inputConfirmPassword.invalid &&
+                    (inputConfirmPassword.dirty || inputConfirmPassword.touched)
+                  "
+                  class="notifyError"
+                >
+                  Please enter confirm password
+                </div>
+                <div
+                  *ngIf="
+                    password !== confirmPassword &&
+                    confirmPassword != undefined &&
+                    confirmPassword != ''
+                  "
+                  class="notifyError"
+                >
+                  Not a matching password
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4 col-sm-4">
+                  <label for="countryCode">Country</label>
+                  <select
+                    (change)="changed($event)"
+                    id="countryCode"
+                    class="form-control"
+                    [(ngModel)]="selectedCountryCode"
+                    #country="ngModel"
+                    name="selectedCountryCode"
+                    required
+                  >
+                    <option
+                      *ngFor="let country of countryName"
+                      [value]="country.code"
+                      >{{ country.name }}</option
+                    >
+                  </select>
+                </div>
+
+                <div class="form-group col-md-8 col-sm-8">
+                  <label for="mobileNumber">Mobile Number</label>
+                  <div class="input-group">
+                    <div
+                      ngDefaultControl
+                      class="input-group-prepend"
+                      [(ngModel)]="internationalCode"
+                      [ngModelOptions]="{ standalone: true }"
+                    >
+                      <span class="input-group-text" id="inputGroupPrepend2">{{
+                        internationalCode
+                      }}</span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mobileNumber"
+                      placeholder="Enter mobile number"
+                      [(ngModel)]="mobileNumber"
+                      [ngModelOptions]="{ standalone: true }"
+                      #inputMobileNumber="ngModel"
+                      required
+                    />
+                  </div>
+                  <div
+                    *ngIf="
+                      inputMobileNumber.invalid &&
+                      (inputMobileNumber.dirty || inputMobileNumber.touched)
+                    "
+                    class="notifyError"
+                  >
+                    MobileNumber is empty
+                  </div>
+                  <div *ngIf="internationalCode == ''" class="notifyError">
+                    Please select country
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="userName" class="col-sm-3 col-form-label"
+                  >Username</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="userName"
+                    placeholder="Username"
+                    [(ngModel)]="userName"
+                    [ngModelOptions]="{ standalone: true }"
+                    #inputUserName="ngModel"
+                    required
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    userName == 'admin' ||
+                    userName == 'admin-' ||
+                    userName == '-admin'
+                  "
+                  class="notifyError mx-3"
+                >
+                  Username can't be admin
+                </div>
+                <small class="text-muted mx-3" *ngIf="userRole == 'admin'"
+                  >While signing up as admin, '-admin' suffix will be added to
+                  your username, eg. alex-admin
+                </small>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-3 col-sm-3  mb-0">
+                  <label>User Role</label>
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      (change)="selectRole($event)"
+                      type="radio"
+                      id="adminRole"
+                      name="role"
+                      [(ngModel)]="userRole"
+                      class="custom-control-input"
+                      value="admin"
+                      checked
+                    />
+                    <label class="custom-control-label" for="adminRole"
+                      >Admin</label
+                    >
+                  </div>
+                </div>
+                <div class="form-group col-md-5 col-sm-5">
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      (change)="selectRole($event)"
+                      type="radio"
+                      id="userRole"
+                      name="role"
+                      [(ngModel)]="userRole"
+                      class="custom-control-input"
+                      value="normal"
+                    />
+                    <label class="custom-control-label" for="userRole"
+                      >Normal</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <label class="ml-1">User Profile Pic</label>
+                <div class="row">
+                  <div class="form-group col-md-9 col-sm-9">
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        id="customFile"
+                        (change)="onSelectFile($event)"
+                      />
+                      <label class="custom-file-label" for="customFile"></label>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-3 col-sm-3">
+                    <button
+                      type="button"
+                      name="upload"
+                      value="upload"
+                      id="upload"
+                      class="btn btn-block btn-dark"
+                      (click)="onImageUpload()"
+                    >
+                      <i class="fa fa-fw fa-upload"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="form-row"
+                class="text-center"
+                id="imagePreview"
+                *ngIf="url"
+              >
+                <div class="col">
+                  Image Preview:
+                  <img class="crop" [src]="url" /> <br />
+                </div>
+              </div>
+
+              <div
+                class="d-flex justify-content-center"
+                *ngIf="appService.showSpinner"
+              >
+                <div class="spinner-grow spinner-grow-sm"></div>
+                Uploading
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-outline-success btn-block signUpBtn"
+              >
+                Sign Up
+              </button>
+              <button
+                class="btn btn-outline-danger btn-block mt-3"
+                (click)="cancelRegister()"
+              >
+                Cancel Register
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

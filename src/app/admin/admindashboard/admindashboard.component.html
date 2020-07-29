@@ -1,0 +1,67 @@
+<app-topnav
+  [dashboardName]="name"
+></app-topnav>
+<div class="wrapper">
+  <app-sidenav
+    [adminUserId]="localStorage.userId"
+    [avatar]="localStorage.avatar"
+    [username]="localStorage.userName"
+  ></app-sidenav>
+  <div
+    class="py-4 px-4"
+    style="flex: 1 1 auto;
+   overflow-y: auto;"
+  >
+    <ngx-spinner
+      style="height: 50px; width: 500px;"
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-atom"
+      [fullScreen]="false"
+      ><p style="color: white">Getting users list...</p></ngx-spinner
+    >
+    <button
+      class="btn btn-primary my-2"
+      type="button"
+      data-toggle="collapse"
+      data-target="#collapseExample"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      Currently online users
+    </button>
+    <div class="collapse" id="collapseExample" *ngIf="onlineUsers.length > 0">
+      <div class="card-body" *ngFor="let online of onlineUsers">
+        {{ online.firstName }}
+      </div>
+    </div>
+    <div class="collapse" id="collapseExample" *ngIf="onlineUsers.length == 0">
+      <div class="card-body">
+        No one is online
+      </div>
+    </div>
+    <h4 class="mt-2 text-center">List of all users</h4>
+    <div class="card no-users" *ngIf="users.length == 0">
+      <p>No users registered</p>
+    </div>
+    <div *ngFor="let user of users; let i = index">
+      <button class="accordion" (click)="toggleAccordian($event, i)">
+        {{ user.firstName }} {{ user.lastName }}
+      </button>
+      <div class="panel" hide="!user.isActive">
+        <p>User Name: {{ user.userName }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Mobile Number: {{ user.mobileNumber }}</p>
+        <p>Country: {{ user.countryName }}</p>
+        <button
+          type="button"
+          class="btn btn-primary mb-3"
+          [routerLink]="['/admin/user/', user.userId]"
+        >
+          View meetings
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

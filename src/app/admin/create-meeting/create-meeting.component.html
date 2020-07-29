@@ -1,0 +1,141 @@
+<app-topnav [dashboardName]="name"></app-topnav>
+<div class="wrapper">
+  <app-sidenav
+    [adminUserId]="localStorage.userId"
+    [avatar]="localStorage.avatar"
+    [username]="localStorage.userName"
+  ></app-sidenav>
+  <div *ngIf="appService.showSpinner" class="d-flex justify-content-center">
+    <!-- using custom spinner -->
+    <!-- <div class="loading">Loading&#8230;</div> -->
+
+  </div>
+  <div class="container  py-3">
+    <div class="row align-items-center">
+      <div class="col">
+        <ngx-spinner
+        style="height: 50px; width: 500px;"
+        bdColor="rgba(0, 0, 0, 0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-atom"
+        [fullScreen]="false"
+        ><p style="color: white">Creating...</p></ngx-spinner
+      >
+        <div class="card">
+          <div class="card-body">
+            <div
+              style="display: flex;justify-content: space-between;font-size: 18px;cursor: pointer;"
+            >
+              <span class="fa-stack fa-lg icon-background" (click)="goBack()">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-angle-left fa-stack-1x"></i>
+              </span>
+            </div>
+            <form
+              name="form"
+              #meetingForm="ngForm"
+              (ngSubmit)="createMeeting()"
+            >
+              <div class="form-group mt-2">
+                <label for="purpose">Purpose</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="purpose"
+                  placeholder="Enter the purpose of meeting"
+                  [(ngModel)]="purpose"
+                  #inputPurpose="ngModel"
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                    inputPurpose.invalid &&
+                    (inputPurpose.dirty || inputPurpose.touched)
+                  "
+                  class="notifyError"
+                >
+                  <div *ngIf="inputPurpose.errors.required">
+                    Please enter the purpose
+                  </div>
+  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="location">Location</label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  name="location"
+                  placeholder="Enter the location of meeting"
+                  [(ngModel)]="location"
+                  #inputLocation="ngModel"
+                  required
+                />
+                <div
+                  *ngIf="
+                    inputLocation.invalid &&
+                    (inputLocation.dirty || inputLocation.touched)
+                  "
+                  class="notifyError"
+                >
+                  <div *ngIf="inputLocation.errors.required">
+                    Please enter the location
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="purpose">Start Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="startdate"
+                  mwlFlatpickr
+                  [(ngModel)]="startDate"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  placeholder="Not set"
+                  [disable]="[disabledDay]"
+                />
+              </div>
+              <div class="form-group">
+                <label for="purpose">End Date</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="enddate"
+                  mwlFlatpickr
+                  [(ngModel)]="endDate"
+                  [enableTime]="true"
+                  dateFormat="Y-m-dTH:i"
+                  placeholder="Not set"
+                  [disable]="[disabledDay]"
+                />
+              </div>
+              <div class="form-group">
+                <label for="admin_name">Created By</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="adminname"
+                  [(ngModel)]="admin_name"
+                  readonly
+                />
+              </div>
+
+              <button
+                type="submit"
+                [disabled]="!meetingForm.valid"
+                class="btn btn-outline-success btn-block loginBtn"
+              >
+                Create
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

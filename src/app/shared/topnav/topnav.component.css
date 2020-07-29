@@ -1,0 +1,18 @@
+p {
+  color: #ffff;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+
+/* svg color */
+.filter-white {
+  filter: invert(97%) sepia(0%) saturate(2033%) hue-rotate(124deg)
+    brightness(102%) contrast(96%);
+}
+
+.navbar-color {
+  background: #002651;
+}

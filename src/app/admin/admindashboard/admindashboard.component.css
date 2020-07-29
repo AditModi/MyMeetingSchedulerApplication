@@ -1,0 +1,104 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 56px);
+}
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.no-users{
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/*custom color for bootstrap button*/
+.btn-primary {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: teal; */
+  /* border-color: #005a5a; */
+  background-color: #28c7fa;
+  border-color: #28c7fa;
+}
+
+.btn-primary:hover {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: #004d4d;
+  border-color: #009a9a; */
+  background-color: #03a7dd;
+  border-color: #03a7dd;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  /* box-shadow: 0 0 0 0.2rem rgba(0, 90, 90, 0.5); */
+  box-shadow: 0 0 0 0.2rem #03a7dd;
+}
+.btn-primary.disabled,
+.btn-primary:disabled {
+  /* color: #fff; */
+  color: #000;
+  /* background-color: teal;
+  border-color: #005a5a; */
+  background-color: #28c7fa;
+  border-color: #28c7fa;
+}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  /* color: #fff; */
+  color: #fff;
+  /* background-color: #00b3b3; */
+  background-color: #024e68;
+  border-color: #024e68;
+  /* border-color: #000; */
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 90, 90, 0.5);
+}

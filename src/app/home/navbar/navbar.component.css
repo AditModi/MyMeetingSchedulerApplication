@@ -1,0 +1,28 @@
+a.active {
+  color: #fff;
+  border-bottom: 5px solid#f90;
+  background-color: rgba(148, 134, 134, 0.5);
+  font-weight: bold;
+}
+
+a:hover:not(.active):not(.navbar-brand) {
+  background-color: rgba(5, 81, 168, 0.5);
+}
+
+.navbar-color {
+  background: #002651;
+}
+
+.navbar-toggler {
+  color: #fff;
+  border: none !important;
+  outline: none !important;
+}
+.navbar-toggler .fa {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.nav-link {
+  color: #fff;
+}
