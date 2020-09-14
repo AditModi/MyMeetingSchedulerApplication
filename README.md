@@ -5,6 +5,7 @@ The website is hosted on Elastic Beanstalk (AWS) .
 As well as the angular application is stored in a docker image.
 
 
+
 ![2020-07-29 (8)](https://user-images.githubusercontent.com/48589838/88796203-ea1d4680-d1be-11ea-809c-358dc4227684.png)
 ![2020-07-29 (9)](https://user-images.githubusercontent.com/48589838/88796206-ebe70a00-d1be-11ea-90dd-f8fb9bdb119e.png)
 ![2020-07-29 (10)](https://user-images.githubusercontent.com/48589838/88796208-ec7fa080-d1be-11ea-9235-7d568d2a0a4b.png)
