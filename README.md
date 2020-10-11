@@ -1,9 +1,9 @@
 # MyMeetingSchedulerApplication
 
+
 MyMeetingSchedulerApplication is an angular application which helps people schedule meetings throughout the day as well as according to people's calenders scheduling meetings becomes easy. 
 The website is hosted on Elastic Beanstalk (AWS) . 
 As well as the angular application is stored in a docker image.
-
 
 
 ![2020-07-29 (8)](https://user-images.githubusercontent.com/48589838/88796203-ea1d4680-d1be-11ea-809c-358dc4227684.png)
